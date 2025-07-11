@@ -1,0 +1,6 @@
+﻿.idea/
+
+ShockTheirOsc/bin/*
+ShockTheirOsc/obj/*
+
+ShockTheirOsc/appsettings.*.json
