@@ -20,17 +20,16 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '9.0.x'
-
-      - name: Upload Build Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          path: ${{ env.RELEASE_DIR }}/*
       
-      - run: |
-          dotnet build
-          apt update
-          apt install zip gzip tar
+      - run: dotnet build
 
+      - uses: montudor/action-zip@v1
+        with:
+          args: zip -qq -r release.zip ${{ env.RELEASE_DIR }}
+      
       - name: Release
         uses: softprops/action-gh-release@v2
-        if: github.ref_type == 'tag'
+        with:
+          files: |
+            LICENSE.md
+            release.zip
