@@ -27,6 +27,12 @@ jobs:
         run: |
           cd ./ShockTheirOsc
           ls -la
+          cd ./bin
+          ls -la
+          cd ./Release
+          ls -la
+          cd ./net9.0
+          ls -la
           cd ${{ env.RELEASE_DIR }}
           zip -qq -r release.zip .
         
