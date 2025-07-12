@@ -25,6 +25,7 @@ jobs:
 
       - name: Create Release Zip
         run: |
+          ls
           cd ${{ env.RELEASE_DIR }}
           zip -qq -r release.zip .
         
