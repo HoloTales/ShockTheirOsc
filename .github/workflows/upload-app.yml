@@ -20,18 +20,24 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '9.0.x'
+
+      - name: Extract Version from .csproj
+        id: extract_version
+        run: |
+          VERSION=$(dotnet msbuild ShockTheirOsc/ShockTheirOsc.csproj -nologo -t:GetVersion -p:GetVersion=true | tail -n 1)
+          echo "version=$VERSION" >> $GITHUB_ENV
       
       - run: dotnet build --configuration Release
 
       - name: Create Release Zip
         run: |
           cd ${{ env.RELEASE_DIR }}
-          zip -qq -r release.zip .
+          zip -qq -r ShockTheirOsc_${{ env.version }}.zip .
         
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
           files: |
             LICENSE.md
-            ${{ env.RELEASE_DIR }}/release.zip
+            ${{ env.RELEASE_DIR }}/ShockTheirOsc_${{ env.version }}.zip
         if: github.ref_type == 'tag'
