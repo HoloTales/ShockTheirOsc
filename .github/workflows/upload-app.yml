@@ -21,10 +21,9 @@ jobs:
         with:
           dotnet-version: '9.0.x'
 
-      - name: Extract Version from .csproj
-        id: extract_version
+      - name: Extract Version Parameter from Project
         run: |
-          VERSION=$(dotnet msbuild ShockTheirOsc/ShockTheirOsc.csproj -nologo -t:GetVersion -p:GetVersion=true | tail -n 1)
+          VERSION=$(dotnet msbuild ShockTheirOsc/ShockTheirOsc.csproj -nologo -property:Version | tail -n 1)
           echo "version=$VERSION" >> $GITHUB_ENV
       
       - run: dotnet build --configuration Release
