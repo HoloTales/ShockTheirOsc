@@ -21,16 +21,10 @@ jobs:
         with:
           dotnet-version: '9.0.x'
       
-      - run: dotnet build
+      - run: dotnet build --configuration Release
 
       - name: Create Release Zip
         run: |
-          cd ./ShockTheirOsc/bin
-          ls -la
-          cd ./Release
-          ls -la
-          cd ./net9.0
-          ls -la
           cd ${{ env.RELEASE_DIR }}
           zip -qq -r release.zip .
         
