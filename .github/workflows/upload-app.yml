@@ -1,9 +1,9 @@
 name: Create Release
 
-on: push
-#  push:
-#    tags:
-#      - '*'
+on:
+  push:
+    tags:
+      - '*'
 
 env:
   RELEASE_DIR: ./ShockTheirOsc/bin/Release/net9.0
@@ -16,7 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup MSBuild
+      - name: Setup Dotnet
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '9.0.x'
@@ -33,3 +33,4 @@ jobs:
           files: |
             LICENSE.md
             release.zip
+        if: github.ref_type == 'tag'
