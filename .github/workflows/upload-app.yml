@@ -38,6 +38,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           name: ShockTheirOsc v${{ env.version }}
+          body: Automated release for version ${{ env.version }}.
           files: |
             LICENSE.md
             ${{ env.RELEASE_DIR }}/ShockTheirOsc_${{ env.version }}.zip
