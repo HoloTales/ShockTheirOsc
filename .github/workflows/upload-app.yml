@@ -25,9 +25,7 @@ jobs:
 
       - name: Create Release Zip
         run: |
-          cd ./ShockTheirOsc
-          ls -la
-          cd ./bin
+          cd ./ShockTheirOsc/bin
           ls -la
           cd ./Release
           ls -la
