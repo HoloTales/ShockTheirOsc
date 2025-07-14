@@ -1,0 +1,45 @@
+name: Create Release
+
+on:
+  push:
+    tags:
+      - '*'
+
+env:
+  RELEASE_DIR: ./ShockTheirOsc/bin/Release/net9.0
+  BRANCH: main
+
+jobs:
+  build:
+    runs-on: [ubuntu-latest]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Dotnet
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+
+      - name: Extract Version Parameter from Project
+        run: |
+          VERSION=$(dotnet msbuild ./ShockTheirOsc -getProperty:Version)
+          echo "version=$VERSION" >> $GITHUB_ENV
+      
+      - run: dotnet build --configuration Release
+
+      - name: Create Release Zip
+        run: |
+          cd ${{ env.RELEASE_DIR }}
+          zip -qq -r ShockTheirOsc_v${{ env.version }}.zip .
+          ls -la
+        
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: ShockTheirOsc v${{ env.version }}
+          body: Automated release for version ${{ env.version }}.
+          files: |
+            LICENSE.md
+            ${{ env.RELEASE_DIR }}/ShockTheirOsc_v${{ env.version }}.zip
+        if: github.ref_type == 'tag'
