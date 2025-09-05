@@ -26,7 +26,7 @@ jobs:
           VERSION=$(dotnet msbuild ./ShockTheirOsc -getProperty:Version)
           echo "version=$VERSION" >> $GITHUB_ENV
       
-      - run: dotnet build --configuration Release -a x64 --os win
+      - run: dotnet build ./ShockTheirOsc/ShockTheirOsc.csproj --configuration Release -a x64 --os win
 
       - name: Create Release Zip
         run: |
