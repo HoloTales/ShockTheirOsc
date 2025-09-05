@@ -7,7 +7,7 @@ using ShockTheirOsc.Providers.PiShock;
 
 namespace ShockTheirOsc;
 
-class Program
+class ShockTheirOsc
 {
     static async Task Main(string[] args)
     {
