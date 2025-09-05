@@ -6,7 +6,7 @@ on:
       - '*'
 
 env:
-  RELEASE_DIR: ./ShockTheirOsc/bin/Release/net9.0
+  RELEASE_DIR: ./build
   BRANCH: main
 
 jobs:
@@ -26,7 +26,7 @@ jobs:
           VERSION=$(dotnet msbuild ./ShockTheirOsc -getProperty:Version)
           echo "version=$VERSION" >> $GITHUB_ENV
       
-      - run: dotnet build ./ShockTheirOsc/ShockTheirOsc.csproj --configuration Release -a x64 --os win
+      - run: dotnet build ./ShockTheirOsc/ShockTheirOsc.csproj --configuration Release -a x64 --os win -o ${{ env.RELEASE_DIR }}
 
       - name: Create Release Zip
         run: |
