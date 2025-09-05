@@ -6,12 +6,12 @@ on:
       - '*'
 
 env:
-  RELEASE_DIR: ./ShockTheirOsc/bin/Release/net9.0-windows
+  RELEASE_DIR: ./ShockTheirOsc/bin/Release/net9.0
   BRANCH: main
 
 jobs:
   build:
-    runs-on: [windows-latest]
+    runs-on: [ubuntu-latest]
 
     steps:
       - uses: actions/checkout@v4
@@ -26,7 +26,7 @@ jobs:
           VERSION=$(dotnet msbuild ./ShockTheirOsc -getProperty:Version)
           echo "version=$VERSION" >> $GITHUB_ENV
       
-      - run: dotnet build --configuration Release
+      - run: dotnet build --configuration Release -a win-x64
 
       - name: Create Release Zip
         run: |

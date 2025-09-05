@@ -2,7 +2,7 @@
   <PropertyGroup>
     <AssemblyName>ShockTheirOsc</AssemblyName>
     <OutputType>exe</OutputType>
-    <TargetFramework>net9.0-windows</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <Version>0.0.5</Version>
